@@ -1,0 +1,45 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agents-trading-ecosystem"
+version = "0.1.0"
+description = "Autonomous AI-powered trading ecosystem"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "Proprietary" }
+
+[tool.hatch]
+metadata.allow-direct-references = true
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+lint.select = ["E", "F", "I", "N", "W", "UP", "B", "C4", "SIM"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+include = ["apps", "services", "agents", "packages"]
+exclude = ["**/tests/**"]
+extraPaths = [
+    "packages/domain-models/src",
+    "packages/shared-core/src",
+    "apps/api/src",
+    "services/market-data/src",
+    "services/strategy/src",
+    "services/portfolio/src",
+    "services/execution/src",
+    "services/risk/src",
+]
+pythonVersion = "3.12"
+strict = ["**/*.py"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"

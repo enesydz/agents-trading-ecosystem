@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "strategy"
+version = "0.1.0"
+description = "Strategy engine for signal generation"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "domain-models",
+    "shared-core",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/strategy"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.pyright]
+include = ["src"]

@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "charliermarsh.ruff",
+    "ms-playwright.playwright",
+    "esbenp.prettier-vscode",
+    "ms-vscode.vscode-json"
+  ]
+}

@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install \
+            -e packages/domain-models \
+            -e packages/shared-core \
+            -e apps/api \
+            -e services/market-data \
+            -e services/strategy \
+            -e services/portfolio \
+            -e services/execution \
+            -e services/risk
+          pip install ruff pyright pytest pytest-asyncio hypothesis
+
+      - name: Lint with Ruff
+        run: |
+          ruff format --check apps services agents packages tests
+          ruff check apps services agents packages tests
+
+      - name: Type check with Pyright
+        run: pyright
+
+      - name: Test with pytest
+        run: pytest tests packages/*/tests apps/*/tests services/*/tests -q
