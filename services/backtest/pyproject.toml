@@ -1,0 +1,14 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "backtest"
+version = "0.1.0"
+description = "Event-driven strategy backtesting and performance analytics"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = ["domain-models", "strategy"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/backtest"]

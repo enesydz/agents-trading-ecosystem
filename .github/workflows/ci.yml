@@ -34,6 +34,10 @@ jobs:
             -e services/portfolio \
             -e services/execution \
             -e services/risk
+            -e services/backtest \
+            -e agents/trading-assistant \
+            -e services/routing \
+            -e services/optimization
           pip install ruff pyright pytest pytest-asyncio hypothesis
 
       - name: Lint with Ruff
@@ -45,4 +49,4 @@ jobs:
         run: pyright
 
       - name: Test with pytest
-        run: pytest tests packages/*/tests apps/*/tests services/*/tests -q
+        run: pytest tests packages/*/tests apps/*/tests services/*/tests agents/*/tests -q

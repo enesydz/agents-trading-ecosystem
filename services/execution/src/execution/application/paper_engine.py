@@ -41,7 +41,7 @@ class PaperExecutionEngine:
             exchange=exchange,
             side=side,
             type=OrderType.MARKET,
-            quantity=Decimal("0.01"),  # Fixed paper size for early testing
+            quantity=Decimal(str(payload.get("quantity", "0.01"))),
         )
         self._orders[order.id] = order
         logger.info(

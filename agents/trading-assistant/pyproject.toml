@@ -1,0 +1,14 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agent-platform"
+version = "0.1.0"
+description = "Safe, provider-agnostic trading agent orchestration platform"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = ["domain-models", "shared-core"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agent_platform"]

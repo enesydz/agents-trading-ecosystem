@@ -38,6 +38,9 @@ class RiskContext:
     max_position_size: Decimal = Decimal("1.0")
     max_total_exposure: Decimal = Decimal("10.0")
     current_exposure: Decimal = Decimal(0)
+    max_drawdown: Decimal = Decimal(1000)
+    peak_equity: Decimal = Decimal(0)
+    current_equity: Decimal = Decimal(0)
     kill_switch_active: bool = False
 
 
@@ -79,11 +82,34 @@ class PositionSizeRule(RiskRule):
         return "max_position_size"
 
     def check(self, signal: Signal, context: RiskContext) -> RiskResult:
-        # Simplified fixed notion; real implementation would use portfolio state.
-        if context.current_exposure + Decimal("0.01") > context.max_total_exposure:
+        if signal.quantity > context.max_position_size:
+            return RiskResult(
+                passed=False,
+                rule=self.name,
+                message=f"Position size {signal.quantity} exceeds {context.max_position_size}",
+            )
+        if context.current_exposure + signal.quantity > context.max_total_exposure:
             return RiskResult(
                 passed=False,
                 rule=self.name,
                 message="Maximum total exposure would be exceeded",
+            )
+        return RiskResult(passed=True, rule=self.name, message="OK")
+
+
+class MaxDrawdownRule(RiskRule):
+    """Rejects signals after the configured equity drawdown is breached."""
+
+    @property
+    def name(self) -> str:
+        return "max_drawdown"
+
+    def check(self, signal: Signal, context: RiskContext) -> RiskResult:
+        drawdown = context.peak_equity - context.current_equity
+        if context.peak_equity > 0 and drawdown >= context.max_drawdown:
+            return RiskResult(
+                passed=False,
+                rule=self.name,
+                message=f"Maximum drawdown reached: {drawdown}",
             )
         return RiskResult(passed=True, rule=self.name, message="OK")

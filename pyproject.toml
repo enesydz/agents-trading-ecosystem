@@ -36,6 +36,10 @@ extraPaths = [
     "services/portfolio/src",
     "services/execution/src",
     "services/risk/src",
+    "services/backtest/src",
+    "agents/trading-assistant/src",
+    "services/routing/src",
+    "services/optimization/src",
 ]
 pythonVersion = "3.12"
 strict = ["**/*.py"]
@@ -43,3 +47,10 @@ strict = ["**/*.py"]
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
+addopts = "--import-mode=importlib"
+pythonpath = [
+    "services/backtest/src",
+    "agents/trading-assistant/src",
+    "services/routing/src",
+    "services/optimization/src",
+]

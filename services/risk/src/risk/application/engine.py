@@ -7,7 +7,13 @@ from shared_core.events import EventBus
 from shared_core.logging import get_logger
 from strategy.domain.signal import Signal
 
-from risk.domain.rules import DailyLossLimitRule, KillSwitchRule, PositionSizeRule, RiskContext
+from risk.domain.rules import (
+    DailyLossLimitRule,
+    KillSwitchRule,
+    MaxDrawdownRule,
+    PositionSizeRule,
+    RiskContext,
+)
 
 logger = get_logger(__name__)
 
@@ -20,7 +26,7 @@ class RiskEngine:
 
     def __init__(self, event_bus: EventBus) -> None:
         self._bus = event_bus
-        self._rules = [KillSwitchRule(), DailyLossLimitRule(), PositionSizeRule()]
+        self._rules = [KillSwitchRule(), DailyLossLimitRule(), MaxDrawdownRule(), PositionSizeRule()]
         self._context = RiskContext()
 
     def update_context(self, **kwargs: object) -> None:

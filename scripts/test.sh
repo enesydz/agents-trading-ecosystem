@@ -8,5 +8,7 @@ echo "Running tests..."
 pytest tests/ -q
 pytest services/*/tests/ -q
 pytest apps/*/tests/ -q
+pytest services/backtest/tests/ -q
+pytest agents/*/tests/ -q
 
 echo "Tests complete."

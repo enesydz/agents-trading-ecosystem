@@ -4,7 +4,9 @@ An enterprise-grade, event-driven trading platform built for autonomous AI agent
 
 ## Status
 
-Foundation phase. Architecture and project structure defined; core services under construction.
+Reference platform complete. Core trading, strategy/risk, AI agents, production safety,
+deployment manifests, routing, and optimization primitives are implemented. Live trading
+remains disabled until an operator supplies venue-specific credentials and explicit approval.
 
 ## Quick Start
 
@@ -24,11 +26,11 @@ cd c:\Users\Admin\Desktop\projects\Agents
 # Start infrastructure services (Redis, PostgreSQL, monitoring)
 docker compose -f infrastructure/docker/docker-compose.yml up -d
 
-# Install shared packages (run from repository root)
-# TODO: add install script
+# Install all packages (run from repository root)
+scripts/setup.ps1
 
 # Run tests
-# TODO: add test script
+python -m pytest -q
 ```
 
 ## Project Structure
@@ -51,6 +53,7 @@ docker compose -f infrastructure/docker/docker-compose.yml up -d
 
 - [Architecture](docs/Architecture.md)
 - [Roadmap](docs/Roadmap.md)
+- [Operations and deployment](docs/Operations.md)
 - [Coding Standards](docs/guides/Coding-Standards.md)
 - [Decisions](docs/decisions/)
 

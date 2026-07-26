@@ -19,7 +19,11 @@ pip install \
   -e services/strategy \
   -e services/portfolio \
   -e services/execution \
-  -e services/risk
+  -e services/risk \
+  -e services/backtest \
+  -e agents/trading-assistant \
+  -e services/routing \
+  -e services/optimization
 
 echo "Installing development dependencies..."
 pip install ruff pyright pytest pytest-asyncio hypothesis

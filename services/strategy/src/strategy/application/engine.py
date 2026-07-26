@@ -1,5 +1,6 @@
 """Strategy engine that consumes market events and emits signals."""
 
+from collections import defaultdict, deque
 from uuid import uuid4
 
 from domain_models.events import EventEnvelope
@@ -18,6 +19,7 @@ class StrategyEngine:
     def __init__(self, event_bus: EventBus, strategies: list[Strategy]) -> None:
         self._bus = event_bus
         self._strategies = strategies
+        self._history: dict[str, deque[Candle]] = defaultdict(lambda: deque(maxlen=500))
 
     async def handle_tick(self, envelope: EventEnvelope) -> None:
         """Handle a MarketTick event."""
@@ -30,10 +32,12 @@ class StrategyEngine:
     async def handle_candle(self, envelope: EventEnvelope) -> None:
         """Handle a MarketCandle event."""
         candle = Candle.model_validate(envelope.payload)
+        history = self._history[candle.symbol]
         for strategy in self._strategies:
-            signal = strategy.on_candle(candle, history=[])
+            signal = strategy.on_candle(candle, history=tuple(history))
             if signal is not None:
                 await self._publish_signal(signal)
+        history.append(candle)
 
     async def _publish_signal(self, signal: Signal) -> None:
         envelope = EventEnvelope.create(

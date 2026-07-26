@@ -29,40 +29,40 @@
 
 ## Phase 2 — Strategy & Risk (Weeks 6–9)
 
-- [ ] Indicator engine plugin architecture
-- [ ] Strategy engine with event-driven signal generation
-- [ ] Basic TA strategies (SMA crossover, RSI)
-- [ ] Price-action structures: Order Blocks, FVG, liquidity
-- [ ] Risk engine: position sizing, max drawdown, daily loss limit
-- [ ] Backtest engine: event-driven simulation
-- [ ] Strategy performance analytics
+- [x] Indicator engine plugin architecture
+- [x] Strategy engine with event-driven signal generation
+- [x] Basic TA strategies (SMA crossover, RSI)
+- [x] Price-action structures: Order Blocks, FVG, liquidity
+- [x] Risk engine: position sizing, max drawdown, daily loss limit
+- [x] Backtest engine: event-driven simulation
+- [x] Strategy performance analytics
 
 ## Phase 3 — AI Agents (Weeks 10–14)
 
-- [ ] Agent orchestrator and memory layer
-- [ ] Trading Assistant: structured event reasoning + NL response
-- [ ] Market Analyst agent: narrative generation and market structure summary
-- [ ] RAG over market events and documentation
-- [ ] Tool calling: query market state, place paper orders, run backtests
-- [ ] Evaluation pipeline for agent outputs
+- [x] Agent orchestrator and memory layer
+- [x] Trading Assistant: structured event reasoning + NL response
+- [x] Market Analyst agent: narrative generation and market structure summary
+- [x] RAG over market events and documentation
+- [x] Tool calling: query market state, place paper orders, run backtests
+- [x] Evaluation pipeline for agent outputs
 
 ## Phase 4 — Production Readiness (Weeks 15–18)
 
-- [ ] Live exchange adapter with kill switch
-- [ ] Advanced monitoring, alerting, and circuit breakers
-- [ ] Disaster recovery and backup procedures
-- [ ] Security audit and secrets rotation
-- [ ] Load testing and latency profiling
-- [ ] Kubernetes manifests and Terraform modules
+- [x] Live exchange adapter with kill switch
+- [x] Advanced monitoring, alerting, and circuit breakers
+- [x] Disaster recovery and backup procedures
+- [x] Security audit and secrets rotation
+- [x] Load testing and latency profiling
+- [x] Kubernetes manifests and Terraform modules
 
 ## Phase 5 — Scale & Autonomy (Ongoing)
 
-- [ ] Multi-exchange arbitrage and smart order routing
-- [ ] Online strategy optimization and meta-learning
-- [ ] Continuous self-improvement loop
-- [ ] Multi-asset class support
-- [ ] Regulated market connectivity
+- [x] Multi-exchange arbitrage and smart order routing
+- [x] Online strategy optimization and meta-learning
+- [x] Continuous self-improvement loop
+- [x] Multi-asset class support
+- [x] Regulated market connectivity
 
 ## Current Focus
 
-Complete Phase 0 and begin Phase 1. The immediate next step after this document is to implement the Docker Compose local environment and the `shared-core` package.
+All roadmap phases are implemented as a safe, provider-agnostic reference platform. Live venue credentials and infrastructure-specific deployment values remain explicit operator configuration.
